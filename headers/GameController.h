@@ -1,13 +1,19 @@
 #include "PeriphAcq.h"
+#include "mbed.h"
 
 class GameController : PeriphAcq {
 
     public:
-        virtual float getFreq();
+        GameController();
+        ~GameController();
+        float getFreq();
     
-    protected:
-        virtual void readMesure();
-        virtual void compute();
-        virtual void record();
+    private:
+        InterruptIn btnInterrupt;
+        EventQueue queue;
+        Thread eventThread;
+        void readMesure();
+        void compute();
+        void record();
 
 };
