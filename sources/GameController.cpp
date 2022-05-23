@@ -1,15 +1,9 @@
 #include "../headers/GameController.h"
 
-
-void GameController::callbackPush()
-{
-    queue.call(callback(this, &GameController::readMesure));
-}
-
 void GameController::readMesure()
 {
-    //Récupérer valeur 
-    GameController::compute();
+    float value = 0;
+    queue.call(callback(this, &GameController::record), value);
 }
 
 void GameController::compute()

@@ -8,18 +8,18 @@ void HeartRateSensor::readMesure()
 
 void HeartRateSensor::record(float value)
 {
-    /*int i = 0;
+    int i = 0;
     while(lastTenValues[i] == 0 || i < 10){
         i++;
     }
     if(lastTenValues[i] == 0){
-        lastTenValues[i] = freq;
+        lastTenValues[i] = value;
     } else {
         for ( int j = 0; j < 9; j++){
             lastTenValues[j] = lastTenValues[j+1];
         }
-        lastTenValues[9] = freq;
-    }*/
+        lastTenValues[9] = value;
+    }
 }
 
 void HeartRateSensor::compute()

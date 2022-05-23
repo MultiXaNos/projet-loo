@@ -8,7 +8,7 @@ class GameController : IPeriphAcq {
     public:
         GameController(PinName pinName) : btnInterrupt(pinName), queue(32 * EVENTS_EVENT_SIZE)
         {
-            btnInterrupt.rise(callback(this, &GameController::callbackPush));
+            btnInterrupt.rise(callback(this, &GameController::readMesure));
         };
         ~GameController();
         float getFreq() { return this->freq; };
@@ -21,7 +21,6 @@ class GameController : IPeriphAcq {
         void readMesure();
         void compute();
         void record(float value);
-        void callbackPush();
 };
 
 #endif
