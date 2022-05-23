@@ -4,6 +4,7 @@
 #include "IPeriphAcq.h"
 #include "GroveEarbudSensor.h"
 
+
 class HeartRateSensor : IPeriphAcq {
 
     public:
