@@ -1,8 +1,11 @@
 #include "mbed.h"
+#include "Application.h"
+ 
+Application application;
 
-// main() runs in its own thread in the OS
-int main()
-{
-    
+int main() {
+    application.Init();
+    application.Run();
 }
+
 

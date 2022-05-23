@@ -1,19 +1,27 @@
-#include "PeriphAcq.h"
-#include "mbed.h"
+#ifndef _GAME_CONTROLLER_H_
+#define _GAME_CONTROLLER_H_
 
-class GameController : PeriphAcq {
+#include "IPeriphAcq.h"
+
+class GameController : IPeriphAcq {
 
     public:
-        GameController();
+        GameController(PinName pinName) : btnInterrupt(pinName), queue(32 * EVENTS_EVENT_SIZE)
+        {
+            btnInterrupt.rise(callback(this, &GameController::callbackPush));
+        };
         ~GameController();
-        float getFreq();
+        float getFreq() { return this->freq; };
     
     private:
         InterruptIn btnInterrupt;
         EventQueue queue;
-        Thread eventThread;
+        float lastTenValues[10] = {0};
+        float freq;
         void readMesure();
         void compute();
-        void record();
-
+        void record(float value);
+        void callbackPush();
 };
+
+#endif
