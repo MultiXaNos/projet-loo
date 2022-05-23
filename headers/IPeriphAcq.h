@@ -10,7 +10,7 @@ class IPeriphAcq {
     protected:
         virtual void readMesure();
         virtual void compute();
-        virtual void record(float value);
+        virtual void record();
 
 };
 

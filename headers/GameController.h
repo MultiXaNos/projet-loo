@@ -20,7 +20,7 @@ class GameController : IPeriphAcq {
         float freq;
         void readMesure();
         void compute();
-        void record(float value);
+        void record();
 };
 
 #endif

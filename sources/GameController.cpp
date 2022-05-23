@@ -2,34 +2,40 @@
 
 void GameController::readMesure()
 {
-    float value = 0;
-    queue.call(callback(this, &GameController::record), value);
+    queue.call(callback(this, &GameController::record));
 }
 
 void GameController::compute()
 {
-    float freqValue = 0;
-    for(int iArray = 0; iArray < 10; iArray++)
+    int i = 9;
+    while(lastTenValues[i] == 0 || i >= 0)
     {
-        freqValue += lastTenValues[iArray];
+        i--;
     }
-    freqValue /= 10;
 
-    freq = freqValue;
+    int indexDiff = i + 1;
+
+    freq = 1 / ((lastTenValues[0] - lastTenValues[i]) / indexDiff); //Calcul de la fréquence d'appui
 }
 
-void GameController::record(float value)
+void GameController::record()
 {
+    float value = Kernel::get_ms_count();
+
     int i = 0;
     while(lastTenValues[i] == 0 || i < 10){
         i++;
     }
-    if(lastTenValues[i] == 0){
-        lastTenValues[i] = 0.0;
-    } else {
-        for ( int j = 0; j < 9; j++){
-            lastTenValues[j] = lastTenValues[j+1];
+    if(lastTenValues[i] == 0)
+    {
+        lastTenValues[i] = value;
+    } 
+    else 
+    {
+        for (int j = 0; j < 9; j++)
+        {
+            lastTenValues[j+1] = lastTenValues[j];
         }
-        lastTenValues[9] = 0.0;
+        lastTenValues[0] = value;
     }
 }
